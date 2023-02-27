@@ -1,11 +1,6 @@
 package com.dcc.jpa_stream_lab.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,8 +71,8 @@ public class StreamLabService {
         // Return the list
         // Research 'java create specific date' and 'java compare dates'
         // You may need to use the helper classes imported above!
-    	
-        return products.findAll().stream().filter(p -> p.)
+
+        return null;
     }
 
     public List<User> RProblemFive()
@@ -104,7 +99,10 @@ public class StreamLabService {
         // Write a query that retrieves all of the products in the shopping cart of the user who has the email "afton@gmail.com".
         // Return the list
 
-    	return null;
+        //List<Product> products= users.findAll().stream().filter(u -> u.getEmail().contains("afton@gmail.com")).toList();
+        User afton = users.findAll().stream().filter(u ->u.getEmail().equals("afton@gmail.com")).findFirst().orElse(null);
+        List<Product> products = afton.getShoppingcartItems().stream().map(shoppingcartItem -> shoppingcartItem.getProduct()).toList();
+        return products;
     }
 
     public long RProblemSeven()
